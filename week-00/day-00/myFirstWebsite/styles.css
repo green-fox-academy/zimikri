@@ -12,10 +12,11 @@ body {
 
 header {
     background-color: #333333;
-    padding: 10px 10% 8px;
+    padding: 0 10%;
     height: 52px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #logo {
@@ -27,9 +28,7 @@ nav {
 
 nav li {
     display: inline-block;
-    height: 32px;
     padding: 0 17px;
-    line-height: 32px;
 }
 
 nav a {
