@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,34 +10,38 @@ body {
     font-size: 14px;
 }
 
-header{
+header {
     background-color: #333333;
     padding: 10px 10% 8px;
     height: 52px;
+    display: flex;
+    justify-content: space-between;
 }
 
-#logo{
-    float: left;
+#logo {
     height: 32px;
 }
-nav{
-    float: right;
+
+nav {
 }
-nav li{
+
+nav li {
     display: inline-block;
     height: 32px;
     padding: 0 17px;
     line-height: 32px;
 }
-nav a{
+
+nav a {
     text-transform: uppercase;
     font-family: Arial, Helvetica, sans-serif;
 }
-a{
+
+a {
     color: #ff0099;
 }
 
-main{
+main {
     padding: 50px 10%;
 }
 
@@ -45,25 +49,29 @@ em {
     font-style: normal;
 }
 
-h1, h2, h3, dt{
+h1, h2, h3, dt {
     font-family: 'Merriweather';
     font-weight: 700;
 }
+
 h1 {
 	font-size: 54px;
 	margin-top: 50px;
 }
-h2.subtitle {
+
+dt.subtitle {
 	font-size: 28px;
 	margin-top: 26px;
 	font-weight: 400;
 	margin-bottom: 14px;
     color: #ff0099;
 }
+
 .description {
 	font-size: 22px;
 	line-height: 26px;
 }
+
 .description p {
 	margin-bottom: 15px;
 }
@@ -76,15 +84,17 @@ h2.subtitle {
     margin: 60px 0 0;
 }
 
-#wiki-wrapper h3 {
+#wiki-wrapper h2 {
 	text-align: center;
 	font-size: 34px;
 	margin: 50px auto 42px;
 }
+
 dt {
 	font-size: 28px;
 	margin: 36px 0 18px;
 }
+
 dd {
 	font-size: 16px;
 	line-height: 26px;
