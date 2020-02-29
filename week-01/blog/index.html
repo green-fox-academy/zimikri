@@ -6,25 +6,36 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <header>The blog</header>
+        <header>
+            <h1>The blog</h1>
+        </header>
         <main>
             <section id="form-wrapper">
+                <h2>Add new post</h2>
                 <form id="new-post" action="">
-                    <fieldset>
-                        <caption>Add new post</caption>
+                    <label for="new-post-title">Title</label>
+                    <input type="text" id="new-post-title">
+                    
+                    <label for="new-post-content">Content</label>
+                    <textarea id="new-post-content" rows="6"></textarea>
 
-                        <label for="new-post-title">Title</label>
-                        <input type="text" id="new-post-title">
-                        
-                        <label for="new-post-content">Title</label>
-                        <input type="text" id="new-post-content">
-
-                        <button type="submit">Submit</button>
-                    </fieldset>
+                    <button type="submit">Submit</button>
                 </form>
             </section>
             <section id="posts-wrapper">
-
+                <h2>Posts</h2>
+                <article>
+                    <h3>Yar Pirate Ipsum</h3>
+                    <p>Yellow Jack parley Arr crow's nest draught mizzenmast swab run a rig bucko jib. Admiral of the Black boatswain Blimey booty deadlights take a caulk main sheet mizzen lass quarterdeck. Brethren of the Coast quarter squiffy poop deck boatswain Corsair Cat o'nine tails overhaul grog nipper.</p>
+                </article>
+                <article>
+                    <h3>Yar Pirate Ipsum</h3>
+                    <p>Yellow Jack parley Arr crow's nest draught mizzenmast swab run a rig bucko jib. Admiral of the Black boatswain Blimey booty deadlights take a caulk main sheet mizzen lass quarterdeck. Brethren of the Coast quarter squiffy poop deck boatswain Corsair Cat o'nine tails overhaul grog nipper.</p>
+                </article>
+                <article>
+                    <h3>Yar Pirate Ipsum</h3>
+                    <p>Yellow Jack parley Arr crow's nest draught mizzenmast swab run a rig bucko jib. Admiral of the Black boatswain Blimey booty deadlights take a caulk main sheet mizzen lass quarterdeck. Brethren of the Coast quarter squiffy poop deck boatswain Corsair Cat o'nine tails overhaul grog nipper.</p>
+                </article>
             </section>
 
         </main>
