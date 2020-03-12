@@ -7,5 +7,9 @@
 let names: string[] = ["Arthur", "Boe", "Chloe"];
 const tmp: string = names[0];
 
-names[0] = names[2];
-names[2] = tmp;
+//names[0] = names[2];
+//names[2] = tmp;
+
+[names[0], names[2]] = [names[2], names[0]];
+
+console.log(names);

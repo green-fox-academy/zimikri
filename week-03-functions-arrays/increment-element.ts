@@ -1,8 +1,8 @@
 'use strict'
 
-// -  Create an array named `numbers` with the following content: `[1, 2, 3, 8, 5, 6]`
-// -  Change the 8 to 4 with the `.map` method 
-// -  Print the fourth element as a test
+// -  Create a variable named `numbers` with the following content: `[1, 2, 3, 4, 5]`
+// -  Increment the third element simply by accessing it
+// -  Log the third element to the console
 
 let numbers: number[] = [1, 2, 3, 4, 5];
 
