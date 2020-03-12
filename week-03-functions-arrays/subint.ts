@@ -19,7 +19,28 @@ function subint(value: number, arr: number[]): number[] {
         do {
             if ((tempitem % 10) == value) return true;
             tempitem = tempitem / 10;
-        } while (tempitem > 0)
-        return (item.toString().indexOf(value.toString()) != -1);
+        } while (tempitem >= 1)
+        return false;
     });
+
+    return newArr;
 }
+
+function subintIndex(value: number, arr: number[]): number[] {
+    let newArr: number[] = [];
+    let tempitem: number;
+    
+    arr.forEach(function (item, index) {
+        tempitem = item;
+        do {
+            if ((tempitem % 10) == value) newArr.push(index);
+            tempitem = tempitem / 10;
+        } while (tempitem >= 1)
+    });
+
+    return newArr;
+}
+
+console.log(subintIndex(1, [1, 11, 34, 52, 61]));
+// should print: `[0, 1, 4]`
+console.log(subintIndex(9, [1, 11, 34, 52, 61]));
