@@ -36,3 +36,21 @@ console.log(num.map((value, index) => {return value * index}));
 
 let passed: number[] = [12, 5, 8, 130, 44];
 console.log(passed.filter((value) => {return (value > 12)}));
+
+var re = /apples/i; 
+var str = "Apples are round, and apples are juicy.";
+if (str.search(re) == -1 ) { 
+   console.log("Does not contain Apples" ); 
+} else { 
+   console.log(str.search(re)); 
+} 
+
+console.log(str.substring(2,3));
+
+var str1 = "This is string one"; 
+var str2 = "This is string two"; 
+var str3 = str1.concat(str2.toString());
+console.log("str1 + str2 : "+str3)
+
+let mt:string = "text"
+console.log(mt.length);
