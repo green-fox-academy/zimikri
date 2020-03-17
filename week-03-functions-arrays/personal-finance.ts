@@ -17,13 +17,14 @@ function getStat(amounts: number[]) {
     let minAmount:number = spendings.reduce((min, element) => (min > element) ? element : min);
     let averageAmount:number = totalAmount / spendings.length;
 
-    let respond = new Map([
+    let response = new Map([
         ['Total', totalAmount],
         ['Max', maxAmount],
         ['Min', minAmount],
         ['Average', averageAmount]
     ]);
-    return respond;
+
+    return response;
 }
 
 console.log(getStat(spendings));
