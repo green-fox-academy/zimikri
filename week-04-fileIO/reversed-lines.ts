@@ -1,9 +1,9 @@
 'use strict';
 
-// Create a method that decrypts duplicated-chars.txt
+// Create a method that decrypts reversed-lines.txt
 
 const fs = require('fs');
-const filePath: string = 'data/duplicated-chars.txt'
+const filePath: string = 'data/reversed-lines.txt'
 
 function readFile(filePath: string): string {
     let fileContent: string = '';
@@ -21,10 +21,12 @@ function getLinesFromString(text: string) {
 }
 
 function decryptLine(line:string): string {
-    return line
-            .split('')
-            .filter((letter, letterIndex) => {return (letterIndex % 2 == 0)})
-            .join('');
+    let dLine: string[] = [];
+    line
+    .split('')
+    .forEach((value) => dLine.unshift(value));
+
+    return dLine.join('');
 }
 
 function decryptLines(lines: string[]): string[] {
