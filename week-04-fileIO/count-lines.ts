@@ -21,14 +21,11 @@ function getLinesFromString(text: string) {
     return text.split('\n');
 }
 
-function countNumberOfLinesInFile(filePath: string) {
+function countNumberOfLinesInFile(filePath: string): number {
     const fileContent: string = readFile(filePath);
+    const linesCount: number = (fileContent != '') ? getLinesFromString(fileContent).length : 0;
     
-    if (fileContent != '') {
-        return getLinesFromString(fileContent).length;
-    } else {
-        return 0;
-    }
+    return linesCount;
 }
 
 console.log(countNumberOfLinesInFile(filePath));
