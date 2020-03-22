@@ -10,6 +10,9 @@
 // The function should not raise any errors if it could not write the file.
 
 const fs = require('fs');
+const FILE_PATH: string = 'data/my-file-multiple-lines.txt';
+const LINE_TEXT: string = 'apple';
+const LINE_COUNT: number = 5;
 
 function writeFile(filePath: string, fileContent: string) {
     try {
@@ -35,6 +38,6 @@ function writeMultipleLinesToFile(filePath: string, line: string, counter: numbe
     writeFile(filePath, fileContent);
 }
 
-writeMultipleLinesToFile('data/my-file-multiple-lines.txt', 'apple', 5);
+writeMultipleLinesToFile(FILE_PATH, LINE_TEXT, LINE_COUNT);
 
 export{};

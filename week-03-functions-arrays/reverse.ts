@@ -17,6 +17,16 @@ let temp: number[] = [];
 
 numbers.forEach( (item) => {temp.unshift(item);});
 
+
+
 console.log();
-console.log('With loop');
+console.log('With loop V1:');
+console.log(temp);
+
+temp = [];
+for (let i = 0; i < numbers.length; i++) {
+    temp[i] = numbers[numbers.length-1-i];
+}
+
+console.log('With loop V2:');
 console.log(temp);

@@ -6,6 +6,7 @@
 // should not raise any error.
 
 const fs = require('fs');
+const filePath: string = 'data/my-file.txt'
 
 function readFile(filePath: string): string {
     let fileContent: string = '';
@@ -30,7 +31,6 @@ function countNumberOfLinesInFile(filePath: string) {
     }
 }
 
-const filePath: string = 'data/my-file.txt'
 console.log(countNumberOfLinesInFile(filePath));
 
 export{};

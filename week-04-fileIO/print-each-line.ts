@@ -6,6 +6,7 @@
 // then it should print the following error message: "Unable to read file: my-file.txt"
 
 const fs = require('fs');
+const FILE_PATH: string = 'data/my-file.txt'
 
 function readFile(filePath: string): string {
   let fileContent: string = '';
@@ -24,19 +25,18 @@ function getLinesFromString(text: string) {
   return text.split('\n');
 }
 
-function printLines(linesToPrint: string[]) {
-  linesToPrint.forEach((value) => {
-    console.log(value);
-    
-  });
+function printLines(filePath: string, ) {
+  const fileContent: string = readFile(filePath);
+
+  if (fileContent != '') {
+    const lines: string[] = getLinesFromString(fileContent);
+    lines.forEach((value) => {
+      console.log(value); 
+    });
+  } 
+
 }
 
-const filePath: string = 'data/my-file.txt'
-const fileContent: string = readFile(filePath);
-
-if (fileContent != '') {
-  const lines: string[] = getLinesFromString(fileContent);
-  printLines(lines);
-}
+printLines(FILE_PATH);
 
 export{};

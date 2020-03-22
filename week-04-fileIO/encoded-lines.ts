@@ -1,9 +1,9 @@
 'use strict';
 
-// Create a method that decrypts duplicated-chars.txt
+// Create a method that decrypts encoded-lines.txt
 
 const fs = require('fs');
-const FILE_PATH: string = 'data/duplicated-chars.txt'
+const FILE_PATH: string = 'data/encoded-lines.txt'
 
 function readFile(filePath: string): string {
     let fileContent: string = '';
@@ -21,10 +21,11 @@ function getLinesFromString(text: string) {
 }
 
 function decryptLine(line:string): string {
-    return line
-            .split('')
-            .filter((letter, letterIndex) => letterIndex % 2 == 0)
-            .join('');
+
+    return  line
+        .split('')
+        .map(value => (value == ' ') ? ' ' : String.fromCharCode(value.codePointAt(0) - 1))
+        .join('');
 }
 
 function decryptLines(lines: string[]): string[] {

@@ -30,21 +30,19 @@ function getStat(amounts: number[]) {
 console.log(getStat(spendings));
 
 
-// console.log(getTotal(spendings));
-
-// How much did we spend?
-let totalAmount:number = spendings.reduce((total, element) => total + element);
-console.log('Total:', totalAmount);
+// // How much did we spend?
+// let totalAmount:number = spendings.reduce((total, element) => total + element);
+// console.log('Total:', totalAmount);
 
 
-// Which was our greatest expense?
-let maxAmount:number = spendings.reduce((max, element) => (max < element) ? element : max);
-console.log('Max:', maxAmount);
+// // Which was our greatest expense?
+// let maxAmount:number = spendings.reduce((max, element) => (max < element) ? element : max);
+// console.log('Max:', maxAmount);
 
-// Which was our cheapest spending?
-let minAmount:number = spendings.reduce((min, element) => (min > element) ? element : min);
-console.log('Min:', minAmount);
+// // Which was our cheapest spending?
+// let minAmount:number = spendings.reduce((min, element) => (min > element) ? element : min);
+// console.log('Min:', minAmount);
 
-// What was the average amount of our spendings?
-let averageAmount:number = totalAmount / spendings.length;
-console.log('Average:', averageAmount);
+// // What was the average amount of our spendings?
+// let averageAmount:number = totalAmount / spendings.length;
+// console.log('Average:', averageAmount);

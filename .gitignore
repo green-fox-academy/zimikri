@@ -1,2 +1,10 @@
 .DS_Store
 zimikri.code-workspace
+test.*
+teszt.*
+node_modules
+package-lock.json
+setting.json
+minesweeper.ts
+fileIO-skeleton.ts
+tsconfig.json

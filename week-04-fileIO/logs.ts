@@ -24,12 +24,8 @@ function readFile(filePath: string): string {
     return fileContent;
 }
 
-function getLinesFromString(text: string, lineSeparator) {
+function getLinesFromString(text: string, lineSeparator): string[] {
     return text.split(lineSeparator);
-}
-
-function getDataFromLine(line, columnSeparator: string, column: number): string {
-    return line.split(columnSeparator)[column];
 }
 
 function getDataFromLines(lines: string[], columnSeparator: string, column: number): string[] {
@@ -42,7 +38,7 @@ function getDataFromLines(lines: string[], columnSeparator: string, column: numb
     return data;
 }
 
-function getUniqueIPs(filePath: string, lineSeparator, columnSeparator: string, ipIndex: number) {
+function getUniqueIPs(filePath: string, lineSeparator, columnSeparator: string, ipIndex: number): string[] {
     const fileContent: string = readFile(filePath);
     const lines: string[] = getLinesFromString(fileContent, lineSeparator);
     const ips: string[] = getDataFromLines(lines, columnSeparator, ipIndex);
@@ -50,7 +46,7 @@ function getUniqueIPs(filePath: string, lineSeparator, columnSeparator: string, 
     return ips.filter((value, index, allIps) => {return allIps.indexOf(value) === index;});    
 }
 
-function getPostRequestRatio(filePath: string, lineSeparator, columnSeparator: string, requestIndex: number) {
+function getPostRequestRatio(filePath: string, lineSeparator, columnSeparator: string, requestIndex: number): number {
     const fileContent: string = readFile(filePath);
     const lines: string[] = getLinesFromString(fileContent, lineSeparator);
     const requests: string[] = getDataFromLines(lines, columnSeparator, requestIndex);
@@ -60,15 +56,7 @@ function getPostRequestRatio(filePath: string, lineSeparator, columnSeparator: s
     return getCount / postCount;
 }
 
-
-// TODO: Create with regex after readFile
-
-console.log(
-    getUniqueIPs(FILE_PATH, LINE_SEPARATOR, COLUMN_SEPARATOR, IP_INDEX)
-);
- 
-console.log(
-    `GET / POST request ratio: ${getPostRequestRatio(FILE_PATH, LINE_SEPARATOR, COLUMN_SEPARATOR, REQUEST_INDEX)}`
-);
+console.log(getUniqueIPs(FILE_PATH, LINE_SEPARATOR, COLUMN_SEPARATOR, IP_INDEX));
+console.log(`\nGET / POST request ratio: ${getPostRequestRatio(FILE_PATH, LINE_SEPARATOR, COLUMN_SEPARATOR, REQUEST_INDEX)}\n`);
 
 export{};

@@ -3,7 +3,7 @@
 // Create a method that decrypts reversed-order.txt
 
 const fs = require('fs');
-const filePath: string = 'data/reversed-order.txt'
+const FILE_PATH: string = 'data/reversed-order.txt'
 
 function readFile(filePath: string): string {
     let fileContent: string = '';
@@ -35,6 +35,6 @@ function decrypt(filePath: string) {
     return decryptedLines.join('\n');
 }
 
-console.log(decrypt(filePath));
+console.log(decrypt(FILE_PATH));
 
 export{};

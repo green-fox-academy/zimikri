@@ -5,7 +5,9 @@
 // and prints the result.
 // It should print 'fail' if the parameter is 0
 
-function devideByTen(num: number): any {
+const NUM_TO_DIVIDE: number = 5;
+
+function divideByTen(num: number): any {
     try {
         if (num === 0) throw new SyntaxError("fail");
         return num / 10;
@@ -14,5 +16,6 @@ function devideByTen(num: number): any {
     }
 }
 
-console.log(devideByTen(2));
+console.log(divideByTen(NUM_TO_DIVIDE));
 
+export{};
