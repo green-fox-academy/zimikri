@@ -6,14 +6,18 @@
 const NUMBERT_TO_CHECK: number = 371;
 
 function checkIfArmstrongNumber(numberToCheck: number) {
-    const numArray: number[] = numberToCheck.toString().split('').map(value => parseInt(value));
+    const exponent: number = numberToCheck.toString().length;
     let armstrongSum: number = 0;
 
-    numArray.forEach((value, index, arr) => {
-        armstrongSum += Math.pow(value, arr.length);
-    });
+    armstrongSum = numberToCheck
+        .toString()
+        .split('')
+        .map(value => Math.pow(parseInt(value), exponent))
+        .reduce((sum, value) => sum + value);
     
     console.log(`The ${numberToCheck} is ${(numberToCheck == armstrongSum) ? '' : 'not '}an Armstrong number.`);
 }
 
 checkIfArmstrongNumber(NUMBERT_TO_CHECK);
+
+export{}
