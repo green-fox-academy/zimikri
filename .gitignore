@@ -6,7 +6,6 @@ node_modules
 package-lock.json
 setting.json
 minesweeper.ts
-fileIO-skeleton.ts
 tsconfig.json
 
 # Created by https://www.gitignore.io/api/visualstudiocode
