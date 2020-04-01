@@ -18,10 +18,12 @@ const POLYGON2: number[][] = [[50, 100], [70, 70], [80, 90], [90, 90], [100, 70]
 function connectDots(coordinates: number[][]) {
     ctx.beginPath();
     ctx.moveTo(coordinates[0][0], coordinates[0][1]);
-    coordinates.push(coordinates.shift());
+
     for (let index = 0; index < coordinates.length; index++) {
         ctx.lineTo(coordinates[index][0], coordinates[index][1])
     }
+
+    ctx.closePath();
     ctx.stroke();
 }
 
