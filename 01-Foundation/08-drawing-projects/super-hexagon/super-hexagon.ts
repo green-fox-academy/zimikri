@@ -16,9 +16,7 @@ function getHexagonCoords(leftBottom: number[], sideLength: number): number[][] 
     ];
 }
 
-function drawHexagon(leftBottomX: number, leftBottomY: number, sideLength: number) {
-    const coordinates: number[][] = getHexagonCoords([leftBottomX, leftBottomY], sideLength);
-
+function drawShapeFromCoords(coordinates: number[][]) {
     ctx.beginPath();
     ctx.moveTo(coordinates[0][0], coordinates[0][1]);
 
@@ -30,10 +28,10 @@ function drawHexagon(leftBottomX: number, leftBottomY: number, sideLength: numbe
     ctx.stroke();
 }
 
-function getBigHexagonSize(smallHexagonSideLength: number, hexagonCountOnSide: number): number[] {
-    const width: number = (2 * hexagonCountOnSide + 1) * smallHexagonSideLength;
-    const height: number = Math.sqrt(3) * (2 * hexagonCountOnSide - 1) * smallHexagonSideLength;
-    return [width, height];
+function drawHexagon(leftBottomX: number, leftBottomY: number, sideLength: number) {
+    const coordinates: number[][] = getHexagonCoords([leftBottomX, leftBottomY], sideLength);
+
+    drawShapeFromCoords(coordinates);
 }
 
 function getSmallHexagonSideLength(hexagonCountOnSide: number): number {

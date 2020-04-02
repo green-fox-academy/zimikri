@@ -13,9 +13,7 @@ function getTriangleCoords(leftBottom: number[], sideLength: number): number[][]
     ];
 }
 
-function drawTriangle(leftBottomX: number, leftBottomY: number, sideLength: number) {
-    const coordinates: number[][] = getTriangleCoords([leftBottomX, leftBottomY], sideLength);
-
+function drawShapeFromCoords(coordinates: number[][]) {
     ctx.beginPath();
     ctx.moveTo(coordinates[0][0], coordinates[0][1]);
 
@@ -25,6 +23,12 @@ function drawTriangle(leftBottomX: number, leftBottomY: number, sideLength: numb
 
     ctx.closePath();
     ctx.stroke();
+}
+
+function drawTriangle(leftBottomX: number, leftBottomY: number, sideLength: number) {
+    const coordinates: number[][] = getTriangleCoords([leftBottomX, leftBottomY], sideLength);
+
+    drawShapeFromCoords(coordinates);
 }
 
 function getBigTriangleSideLength(): number {
