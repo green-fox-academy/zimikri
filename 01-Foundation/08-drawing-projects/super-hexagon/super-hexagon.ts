@@ -1,0 +1,72 @@
+'use strict';
+
+const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
+const ctx = canvas.getContext('2d');
+
+const HEXAGONAL_SIDE_SIZE: number = 4;
+
+function getHexagonCoords(leftBottom: number[], sideLength: number): number[][] {
+    return [
+        [leftBottom[0], leftBottom[1]],
+        [leftBottom[0] - sideLength / 2, leftBottom[1] - Math.sqrt(3) / 2 * sideLength],
+        [leftBottom[0], leftBottom[1] - Math.sqrt(3) * sideLength],
+        [leftBottom[0] + sideLength, leftBottom[1] - Math.sqrt(3) * sideLength],
+        [leftBottom[0] + 1.5 * sideLength, leftBottom[1] - Math.sqrt(3) / 2 * sideLength],
+        [leftBottom[0] + sideLength, leftBottom[1]],
+    ];
+}
+
+function drawHexagon(leftBottomX: number, leftBottomY: number, sideLength: number) {
+    const coordinates: number[][] = getHexagonCoords([leftBottomX, leftBottomY], sideLength);
+
+    ctx.beginPath();
+    ctx.moveTo(coordinates[0][0], coordinates[0][1]);
+
+    for (let index = 0; index < coordinates.length; index++) {
+        ctx.lineTo(coordinates[index][0], coordinates[index][1])
+    }
+
+    ctx.closePath();
+    ctx.stroke();
+}
+
+function getBigHexagonSize(smallHexagonSideLength: number, hexagonCountOnSide: number): number[] {
+    const width: number = (2 * hexagonCountOnSide + 1) * smallHexagonSideLength;
+    const height: number = Math.sqrt(3) * (2 * hexagonCountOnSide - 1) * smallHexagonSideLength;
+    return [width, height];
+}
+
+function getSmallHexagonSideLength(hexagonCountOnSide: number): number {
+    const sideFromWidth: number = (canvas.width - 10) / (3 * hexagonCountOnSide - 1);
+    const sideFromHeigth: number = (canvas.height - 10) / Math.sqrt(3) / (2 * hexagonCountOnSide - 1);
+    return (sideFromWidth < sideFromHeigth) ? sideFromWidth : sideFromHeigth;
+}
+
+function getLeftBottomAbsolute(smallHexagonSideLength: number, hexagonCountOnSide: number): number[] {
+    const posX: number = (canvas.width / 2) - smallHexagonSideLength / 2;
+    const posY: number = (canvas.height / 2) + (Math.sqrt(3) * (2 * hexagonCountOnSide - 1) / 2 * smallHexagonSideLength);
+
+    return [posX, posY];
+}
+
+function drawHexagons(hexagonCountOnSide: number) {
+    const smallHexagonSideLength: number = getSmallHexagonSideLength(hexagonCountOnSide);
+    const leftBottomAbsolute: number[] = getLeftBottomAbsolute(smallHexagonSideLength, hexagonCountOnSide);
+    const deltaX: number = 1.5 * smallHexagonSideLength;
+    const deltaY: number = Math.sqrt(3) * smallHexagonSideLength;
+
+    let posX: number = leftBottomAbsolute[0];
+    let posY: number = leftBottomAbsolute[1];
+    let maxHexagonCount: number = 2 * hexagonCountOnSide - 1;
+
+    for (let x = 0; x < hexagonCountOnSide ; x++) {
+        for (let y = 0; y < maxHexagonCount; y++) {
+            drawHexagon(posX + x * deltaX, posY - y * deltaY, smallHexagonSideLength);
+            if (x != 0) drawHexagon(posX - x * deltaX, posY - y * deltaY, smallHexagonSideLength);
+        }
+        posY -= deltaY / 2;
+        maxHexagonCount--;
+    }
+}
+
+drawHexagons(HEXAGONAL_SIDE_SIZE);
