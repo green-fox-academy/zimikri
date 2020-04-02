@@ -4,6 +4,13 @@ const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
 const HEXAGONAL_SIDE_SIZE: number = 4;
+const HEXAGONAL_COLOR: string = 'random'; // You can set it 'random' to make it funny
+
+drawHexagons(HEXAGONAL_SIDE_SIZE, HEXAGONAL_COLOR);
+
+function getRandomRGBcolor(): string {
+    return `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`;
+}
 
 function getHexagonCoords(leftBottom: number[], sideLength: number): number[][] {
     return [
@@ -16,8 +23,10 @@ function getHexagonCoords(leftBottom: number[], sideLength: number): number[][] 
     ];
 }
 
-function drawShapeFromCoords(coordinates: number[][]) {
+function drawShapeFromCoords(coordinates: number[][], color: string) {
+    color = (color == 'random') ? getRandomRGBcolor() : color;
     ctx.beginPath();
+    ctx.strokeStyle = color;
     ctx.moveTo(coordinates[0][0], coordinates[0][1]);
 
     for (let index = 0; index < coordinates.length; index++) {
@@ -28,10 +37,10 @@ function drawShapeFromCoords(coordinates: number[][]) {
     ctx.stroke();
 }
 
-function drawHexagon(leftBottomX: number, leftBottomY: number, sideLength: number) {
+function drawHexagon(leftBottomX: number, leftBottomY: number, sideLength: number, color: string) {
     const coordinates: number[][] = getHexagonCoords([leftBottomX, leftBottomY], sideLength);
 
-    drawShapeFromCoords(coordinates);
+    drawShapeFromCoords(coordinates, color);
 }
 
 function getSmallHexagonSideLength(hexagonCountOnSide: number): number {
@@ -47,7 +56,7 @@ function getLeftBottomAbsolute(smallHexagonSideLength: number, hexagonCountOnSid
     return [posX, posY];
 }
 
-function drawHexagons(hexagonCountOnSide: number) {
+function drawHexagons(hexagonCountOnSide: number, color: string) {
     const smallHexagonSideLength: number = getSmallHexagonSideLength(hexagonCountOnSide);
     const leftBottomAbsolute: number[] = getLeftBottomAbsolute(smallHexagonSideLength, hexagonCountOnSide);
     const deltaX: number = 1.5 * smallHexagonSideLength;
@@ -59,12 +68,11 @@ function drawHexagons(hexagonCountOnSide: number) {
 
     for (let x = 0; x < hexagonCountOnSide ; x++) {
         for (let y = 0; y < maxHexagonCount; y++) {
-            drawHexagon(posX + x * deltaX, posY - y * deltaY, smallHexagonSideLength);
-            if (x != 0) drawHexagon(posX - x * deltaX, posY - y * deltaY, smallHexagonSideLength);
+            drawHexagon(posX + x * deltaX, posY - y * deltaY, smallHexagonSideLength, color);
+            if (x != 0) drawHexagon(posX - x * deltaX, posY - y * deltaY, smallHexagonSideLength, color);
         }
         posY -= deltaY / 2;
         maxHexagonCount--;
     }
 }
 
-drawHexagons(HEXAGONAL_SIDE_SIZE);

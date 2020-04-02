@@ -4,6 +4,13 @@ const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
 const TRIANGLE_COUNT: number = 21;
+const TRIANGLE_COLOR: string = 'random'; // You can set it 'random' to make it funny
+
+drawTriangles(TRIANGLE_COUNT, TRIANGLE_COLOR);
+
+function getRandomRGBcolor(): string {
+    return `rgb(${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)}, ${Math.round(Math.random() * 255)})`;
+}
 
 function getTriangleCoords(leftBottom: number[], sideLength: number): number[][] {
     return [
@@ -13,8 +20,10 @@ function getTriangleCoords(leftBottom: number[], sideLength: number): number[][]
     ];
 }
 
-function drawShapeFromCoords(coordinates: number[][]) {
+function drawShapeFromCoords(coordinates: number[][], color: string) {
+    color = (color == 'random') ? getRandomRGBcolor() : color;
     ctx.beginPath();
+    ctx.strokeStyle = color;
     ctx.moveTo(coordinates[0][0], coordinates[0][1]);
 
     for (let index = 0; index < coordinates.length; index++) {
@@ -25,10 +34,10 @@ function drawShapeFromCoords(coordinates: number[][]) {
     ctx.stroke();
 }
 
-function drawTriangle(leftBottomX: number, leftBottomY: number, sideLength: number) {
+function drawTriangle(leftBottomX: number, leftBottomY: number, sideLength: number, color: string) {
     const coordinates: number[][] = getTriangleCoords([leftBottomX, leftBottomY], sideLength);
 
-    drawShapeFromCoords(coordinates);
+    drawShapeFromCoords(coordinates, color);
 }
 
 function getBigTriangleSideLength(): number {
@@ -46,15 +55,12 @@ function getLeftBottomAbsolute(bigTriangleSideLength: number): number[] {
     return [posX, posY];
 }
 
-function drawTriangles(triangleCount: number) {
+function drawTriangles(triangleCount: number, color: string) {
     const bigTriangleSideLength: number = getBigTriangleSideLength();
     const smallTriangleSideLength: number = getSmallTriangleSideLength(bigTriangleSideLength, triangleCount);
     const leftBottomAbsolute: number[] = getLeftBottomAbsolute(bigTriangleSideLength);
     const deltaX: number = smallTriangleSideLength;
     const deltaY: number = Math.sqrt(3) / 2 * smallTriangleSideLength;
-
-    console.log(bigTriangleSideLength);
-    
 
     let firstPosX: number = leftBottomAbsolute[0];
     let posX: number = firstPosX;
@@ -63,7 +69,7 @@ function drawTriangles(triangleCount: number) {
     for (let y = triangleCount; y > 0 ; y--) {
         posX = firstPosX;
         for (let x = 0; x < y; x++) {
-            drawTriangle(posX, posY, smallTriangleSideLength);
+            drawTriangle(posX, posY, smallTriangleSideLength, color);
             posX += deltaX;
         }
         firstPosX += deltaX / 2;
@@ -71,4 +77,3 @@ function drawTriangles(triangleCount: number) {
     }
 }
 
-drawTriangles(TRIANGLE_COUNT);
