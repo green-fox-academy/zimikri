@@ -41,7 +41,7 @@ function drawTriangle(leftBottomX: number, leftBottomY: number, sideLength: numb
 }
 
 function getBigTriangleSideLength(): number {
-    return ((Math.sqrt(3) / 2 * canvas.width < canvas.height) ? canvas.width : 2 * canvas.height / (Math.sqrt(3);
+    return ((Math.sqrt(3) / 2 * canvas.width < canvas.height) ? canvas.width : 2 * canvas.height / (Math.sqrt(3)));
 }
 
 function getSmallTriangleSideLength(bigTriangleSideLength: number, triangleCount: number): number {
