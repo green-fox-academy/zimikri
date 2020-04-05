@@ -14,34 +14,35 @@ const ctx = canvas.getContext('2d');
 const RECTANGLES_COUNT: number = 3;
 const RECTANGLES_SIZE: number = 50;
 
-function getRandomPosX(): number {
-    return Math.round(Math.random() * (canvas.width - RECTANGLES_SIZE));
-}
+drawSomeRectangles(RECTANGLES_COUNT, RECTANGLES_SIZE);
 
-function getRandomPosY(): number {
-    return Math.round(Math.random() * (canvas.height - RECTANGLES_SIZE));
-}
-
-function getRandomRGBcolorPart(): number {
-    return Math.round(Math.random() * 255);
-}
-
-function drawRandomColorRectangle(posX, posY) {
-    let color: string = `rgb(${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()})`;
-
-    ctx.strokeStyle = color;
-    ctx.strokeRect(posX, posY, RECTANGLES_SIZE, RECTANGLES_SIZE);
-}
-
-function drawSomeRectangles(numberOfRectangles: number) {
+function drawSomeRectangles(numberOfRectangles: number, size: number) {
     let posX: number;
     let posY: number;
 
     for (let index = 0; index < numberOfRectangles; index++) {
-        posX = getRandomPosX();
-        posY = getRandomPosY();
-        drawRandomColorRectangle(posX, posY);
+        posX = getRandomPosX(size);
+        posY = getRandomPosY(size);
+        drawRandomColorRectangle(posX, posY, size);
     }
 }
 
-drawSomeRectangles(RECTANGLES_COUNT);
+function drawRandomColorRectangle(posX, posY, size: number) {
+    let color: string = getRandomRGBcolor();
+
+    ctx.strokeStyle = color;
+    ctx.strokeRect(posX, posY, size, size);
+}
+
+function getRandomPosX(width: number): number {
+    return Math.round(Math.random() * (canvas.width - width));
+}
+
+function getRandomPosY(height: number): number {
+    return Math.round(Math.random() * (canvas.height - height));
+}
+
+// Just to make it funny :)
+function getRandomRGBcolor(): string {
+    return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+}

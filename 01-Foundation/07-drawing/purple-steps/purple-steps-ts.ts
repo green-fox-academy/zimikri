@@ -11,21 +11,14 @@ const ctx = canvas.getContext('2d');
 const NUMBER_OF_BOXES: number = 19;
 const BOXSIZE: number = 10;
 
-function drawPurpleSteps(numberOfBoxes: number, boxSize: number) {
-    let posX: number = boxSize;
-    let posY: number = boxSize;
+drawPurpleSteps(NUMBER_OF_BOXES, BOXSIZE);
 
-    for (let index = 0; index < numberOfBoxes; index++) {
+function drawPurpleSteps(numberOfBoxes: number, boxSize: number) {
+    for (let i = 1; i <= numberOfBoxes; i++) {
         ctx.fillStyle = 'purple';
-        ctx.fillRect(posX, posY, boxSize, boxSize);
+        ctx.fillRect(i * boxSize, i * boxSize, boxSize, boxSize);
 
         ctx.strokeStyle = '#222222';
-        ctx.strokeRect(posX, posY, boxSize, boxSize);
-
-
-        posX += boxSize + 1;
-        posY += boxSize + 1;
+        ctx.strokeRect(i * boxSize, i * boxSize, boxSize, boxSize);
     }
 }
-
-drawPurpleSteps(NUMBER_OF_BOXES, BOXSIZE);

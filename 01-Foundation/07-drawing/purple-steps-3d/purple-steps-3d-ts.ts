@@ -10,18 +10,18 @@ const ctx = canvas.getContext('2d');
 
 const NUMBER_OF_BOXES: number = 6;
 const BOXSIZE: number = 10;
+const BOREDER_COLOR: string = '#222222';
+const FILL_COLOR: string = 'purple';
 
-function drawPurpleSteps3D(numberOfBoxes: number, boxSize: number) {
+drawPurpleSteps3D(NUMBER_OF_BOXES, BOXSIZE, BOREDER_COLOR, FILL_COLOR);
+
+function drawPurpleSteps3D(numberOfBoxes: number, boxSize: number, borderColor: string, fillColor: string) {
     let posX: number = boxSize;
     let posY: number = boxSize;
     let deltaBoxSize: number = boxSize;
 
     for (let index = 0; index < numberOfBoxes; index++) {
-        ctx.fillStyle = 'purple';
-        ctx.fillRect(posX, posY, boxSize, boxSize);
-
-        ctx.strokeStyle = '#222222';
-        ctx.strokeRect(posX, posY, boxSize, boxSize);
+        drawBorderedBox(posX, posY, boxSize, borderColor, fillColor)
 
         posX += boxSize + 1;
         posY += boxSize + 1;
@@ -29,4 +29,10 @@ function drawPurpleSteps3D(numberOfBoxes: number, boxSize: number) {
     }
 }
 
-drawPurpleSteps3D(NUMBER_OF_BOXES, BOXSIZE);
+function drawBorderedBox(posX: number, posY: number, boxSize: number, borderColor: string, fillColor: string) {
+    ctx.fillStyle = fillColor;
+    ctx.fillRect(posX, posY, boxSize, boxSize);
+
+    ctx.strokeStyle = borderColor;
+    ctx.strokeRect(posX, posY, boxSize, boxSize);
+}

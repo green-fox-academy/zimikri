@@ -14,8 +14,8 @@ const ctx = canvas.getContext('2d');
 const SQUARECOUNT: number = 5;
 
 // Just to make it funny :)
-function getRandomRGBcolorPart(): number {
-    return Math.round(Math.random() * 255);
+function getRandomRGBcolor(): string {
+    return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 }
 
 function getRandomSquareSize(): number {
@@ -24,7 +24,7 @@ function getRandomSquareSize(): number {
 }
 
 function drawSquareToCenter(boxSize: number) {
-    ctx.strokeStyle = `rgb(${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()})`;
+    ctx.strokeStyle = getRandomRGBcolor();
     ctx.strokeRect(canvas.width / 2 - boxSize / 2, canvas.height / 2 - boxSize / 2, boxSize, boxSize);
 }
 

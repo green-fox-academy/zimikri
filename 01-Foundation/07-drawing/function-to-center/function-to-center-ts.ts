@@ -10,20 +10,7 @@ const ctx = canvas.getContext('2d');
 // and draws a line from that point to the center of the canvas.
 // Fill the canvas with lines from the edges, every 20 px, to the center.
 
-const CENTER: number[] = [canvas.width / 2, canvas.height / 2];
-
-// Just to make it funny :)
-function getRandomRGBcolorPart(): number {
-    return Math.round(Math.random() * 255);
-}
-
-function drawLineToCenter(posX: number, posY: number) {
-    ctx.beginPath();
-    ctx.moveTo(posX, posY);
-    ctx.lineTo(CENTER[0], CENTER[1]);
-    ctx.strokeStyle = `rgb(${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()})`;
-    ctx.stroke();
-}
+fillTheCanvasLinesFromEdgeToCenter(20);
 
 function fillTheCanvasLinesFromEdgeToCenter(step: number) {
     for (let posX = 0; posX <= canvas.width; posX = posX + step) {
@@ -37,4 +24,15 @@ function fillTheCanvasLinesFromEdgeToCenter(step: number) {
     }
 }
 
-fillTheCanvasLinesFromEdgeToCenter(20);
+function drawLineToCenter(posX: number, posY: number) {
+    ctx.beginPath();
+    ctx.moveTo(posX, posY);
+    ctx.lineTo(canvas.width / 2, canvas.height / 2);
+    ctx.strokeStyle = getRandomRGBcolor();
+    ctx.stroke();
+}
+
+// Just to make it funny :)
+function getRandomRGBcolor(): string {
+    return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+}

@@ -13,9 +13,20 @@ const ctx = canvas.getContext('2d');
 const LINECOUNT: number = 10;
 const LINE_WIDTH: number = 70;
 
-// Just to make it funny :)
-function getRandomRGBcolorPart(): number {
-    return Math.round(Math.random() * 255);
+drawHorizontalLines(LINECOUNT, LINE_WIDTH);
+
+function drawHorizontalLines(numberOfLines: number, lineWidth: number) {
+    for (let index = 0; index < numberOfLines; index++) {
+        drawHorizontalLine(getRandomPosX(lineWidth), getRandomPosY(), lineWidth);
+    }
+}
+
+function drawHorizontalLine(posX: number, posY: number, lineWith: number = 50) {
+    ctx.beginPath();
+    ctx.moveTo(posX, posY);
+    ctx.lineTo(posX + lineWith, posY);
+    ctx.strokeStyle = getRandomRGBcolor();
+    ctx.stroke();
 }
 
 function getRandomPosX(lineWith: number): number {
@@ -26,18 +37,7 @@ function getRandomPosY(): number {
     return Math.round(Math.random() * canvas.height);
 }
 
-function drawHorizontalLine(posX: number, posY: number, lineWith: number = 50) {
-    ctx.beginPath();
-    ctx.moveTo(posX, posY);
-    ctx.lineTo(posX + lineWith, posY);
-    ctx.strokeStyle = `rgb(${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()}, ${getRandomRGBcolorPart()})`;
-    ctx.stroke();
+// Just to make it funny :)
+function getRandomRGBcolor(): string {
+    return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 }
-
-function drawHorizontalLines(numberOfLines: number, lineWidth: number) {
-    for (let index = 0; index < numberOfLines; index++) {
-        drawHorizontalLine(getRandomPosX(lineWidth), getRandomPosY(), lineWidth);
-    }
-}
-
-drawHorizontalLines(LINECOUNT, LINE_WIDTH);

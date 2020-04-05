@@ -13,22 +13,13 @@ const ctx = canvas.getContext('2d');
 
 const STARS_COUNT: number = 50;
 
-// Just to make it funny :)
-function getRandomGrayColor(): string {
-    const color: string = Math.round(Math.random() * 155 + 100).toString();
-    return `rgb(${color}, ${color}, ${color})`;
-}
+drawSomeStars(STARS_COUNT);
 
-function getRandomPosX(): number {
-    return Math.round(Math.random() * canvas.width);
-}
-
-function getRandomPosY(): number {
-    return Math.round(Math.random() * canvas.height);
-}
-
-function getRandomStarSize(): number {
-    return Math.floor(Math.random() * 2) + 1;
+function drawSomeStars(numberOfLines: number) {
+    createBlackNight();
+    for (let index = 0; index < numberOfLines; index++) {
+        drawRandomStar();
+    }
 }
 
 function drawRandomStar() {
@@ -46,12 +37,20 @@ function createBlackNight() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-function drawSomeStars(numberOfLines: number) {
-    createBlackNight();
-    for (let index = 0; index < numberOfLines; index++) {
-        drawRandomStar();
-    }
+// Just to make it funny :)
+function getRandomGrayColor(): string {
+    const color: string = Math.floor(Math.random() * 156 + 100).toString();
+    return `rgb(${color}, ${color}, ${color})`;
 }
 
-drawSomeStars(STARS_COUNT);
+function getRandomPosX(): number {
+    return Math.floor(Math.random() * (canvas.width + 1));
+}
 
+function getRandomPosY(): number {
+    return Math.floor(Math.random() * (canvas.height + 1));
+}
+
+function getRandomStarSize(): number {
+    return Math.floor(Math.random() * 3) + 1;
+}
