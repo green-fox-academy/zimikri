@@ -38,13 +38,9 @@ function getSidePoints(fromPos: number[], toPos: number[], countOfLines: number)
     const deltaX: number = (fromPos[0] - toPos[0]) / countOfLines;
     const deltaY: number = (fromPos[1] - toPos[1]) / countOfLines;
     let sidePoints: number[][] = [];
-    let coordX: number = toPos[0];
-    let coordY: number = toPos[1];
 
-    for (let index = 1; index < countOfLines; index++) {
-        coordX += deltaX;
-        coordY += deltaY;
-        sidePoints.push([coordX, coordY]);
+    for (let i = 1; i < countOfLines; i++) {
+        sidePoints.push([toPos[0] + i * deltaX, toPos[1] + i * deltaY]);
     }
 
     return sidePoints;

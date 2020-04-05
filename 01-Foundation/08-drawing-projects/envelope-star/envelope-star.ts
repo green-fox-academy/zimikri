@@ -3,7 +3,6 @@
 const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
-const QUARTERS_NUMBER: number = 4;
 const LINE_COUNT: number = 20;
 const LINE_COLOR_1: string = 'green';
 
@@ -11,7 +10,7 @@ startEnvelopeStar(LINE_COUNT, LINE_COLOR_1);
 
 function startEnvelopeStar(lineCount: number, color: string) {
     const cornerPos: number[] = [canvas.width / 2, canvas.height / 2];
-    let ends: number[][] = [
+    const ends: number[][] = [
         [0, canvas.height / 2],
         [canvas.width / 2, 0],
         [canvas.width, canvas.height / 2],
@@ -36,13 +35,9 @@ function getSidePoints(fromPos: number[], toPos: number[], countOfLines: number)
     const deltaX: number = (fromPos[0] - toPos[0]) / countOfLines;
     const deltaY: number = (fromPos[1] - toPos[1]) / countOfLines;
     let sidePoints: number[][] = [];
-    let coordX: number = toPos[0];
-    let coordY: number = toPos[1];
 
-    for (let index = 1; index < countOfLines; index++) {
-        coordX += deltaX;
-        coordY += deltaY;
-        sidePoints.push([coordX, coordY]);
+    for (let i = 1; i < countOfLines; i++) {
+        sidePoints.push([toPos[0] + i * deltaX, toPos[1] + i * deltaY]);
     }
 
     return sidePoints;
