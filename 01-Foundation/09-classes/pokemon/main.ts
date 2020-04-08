@@ -31,7 +31,7 @@ function getEffectivePokemonNames(pokemonOfAsh: Pokemon[], wildPokemon: Pokemon)
         }
     });
 
-    return effectivePokemonNames;
+    return effectivePokemonNames; 
 }
 
 function initializePokemon(): Pokemon[] {
