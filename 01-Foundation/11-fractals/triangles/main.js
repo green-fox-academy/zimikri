@@ -20,7 +20,6 @@ class Triangle {
         this._ctx.strokeStyle = '#666666';
         this._ctx.fillStyle = '#cccccc';
         this._ctx.lineWidth = 3;
-        // this._ctx.fillRect(0, 0, this._canvas.width, this._canvas.height);
     }
     initBigTriangle(position) {
         const rotate = new Map([
