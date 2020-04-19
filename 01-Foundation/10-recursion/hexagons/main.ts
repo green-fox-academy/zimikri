@@ -52,7 +52,3 @@ function drawOneHexagon(topLeftX: number, topLeftY: number, size: number, counte
 function getRadian(angle: number): number {
     return Math.PI / 180 * angle;
 }
-
-function delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-}

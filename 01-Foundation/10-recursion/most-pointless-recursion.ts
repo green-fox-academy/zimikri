@@ -2,8 +2,6 @@
 
 // Create a function with recursion which gives back the original (integer) number
 
-
-
 function whichNumber(num: number): number {
     if (num == 0) return 0;
     const signMultiplier: number = (num < 0) ? -1 : 1;

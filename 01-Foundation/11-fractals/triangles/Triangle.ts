@@ -56,21 +56,21 @@ export default class Triangle {
     private sierpinski(coords:number[][], counter: number = this._depth) {
         if (counter == 0) return;
 
-        const innerTriangleCoords:number[][][] = this.getInnerTriangleCoords(coords);
+        const innerTrianglesCoords:number[][][] = this.getInnerTrianglesCoords(coords);
 
         if (counter == this._depth) {
-            this.drawTriangle(coords, this._baseColor);
-            this.drawTriangle(innerTriangleCoords[0]);
+            this.drawShapeFromCoords(coords, this._baseColor);
+            this.drawShapeFromCoords(innerTrianglesCoords[0]);
         } else {
-            this.drawTriangle(innerTriangleCoords[0]);
+            this.drawShapeFromCoords(innerTrianglesCoords[0]);
         }
         
-        this.sierpinski(innerTriangleCoords[1], counter - 1);
-        this.sierpinski(innerTriangleCoords[2], counter - 1);
-        this.sierpinski(innerTriangleCoords[3], counter - 1);
+        this.sierpinski(innerTrianglesCoords[1], counter - 1);
+        this.sierpinski(innerTrianglesCoords[2], counter - 1);
+        this.sierpinski(innerTrianglesCoords[3], counter - 1);
     }
 
-    private drawTriangle(coordinates: number[][], color: string = this._triangleColor) {
+    private drawShapeFromCoords(coordinates: number[][], color: string = this._triangleColor) {
         this._ctx.beginPath();
         this._ctx.moveTo(coordinates[0][0], coordinates[0][1]);
     
@@ -83,20 +83,20 @@ export default class Triangle {
         this._ctx.fill();
     }
     
-    private getInnerTriangleCoords(coordinates: number[][]): number[][][] {
+    private getInnerTrianglesCoords(coordinates: number[][]): number[][][] {
         const localCoordinates: number[][] = [...coordinates, coordinates[0]];
         const midCoords: number [][] = [];
-        const innerTriangleCoords: number [][][] = [];
+        const innerTrianglesCoords: number [][][] = [];
 
         for (let i = 0; i < localCoordinates.length - 1; i++) {
             midCoords.push(this.getMidPoint(localCoordinates[i], localCoordinates[i + 1]));
         }
-        innerTriangleCoords.push(midCoords);
-        innerTriangleCoords.push([coordinates[0], midCoords[0], midCoords[2]]);
-        innerTriangleCoords.push([midCoords[0], coordinates[1], midCoords[1]]);
-        innerTriangleCoords.push([midCoords[2], midCoords[1], coordinates[2]]);
+        innerTrianglesCoords.push(midCoords);
+        innerTrianglesCoords.push([coordinates[0], midCoords[0], midCoords[2]]);
+        innerTrianglesCoords.push([midCoords[0], coordinates[1], midCoords[1]]);
+        innerTrianglesCoords.push([midCoords[2], midCoords[1], coordinates[2]]);
 
-        return innerTriangleCoords;
+        return innerTrianglesCoords;
     }
 
     private getMidPoint(fromPoint: number[], toPoint: number[]): number[] {
