@@ -5,8 +5,8 @@ teszt.*
 node_modules
 package-lock.json
 setting.json
-minesweeper.ts
 tsconfig.json
+tmp
 
 # Created by https://www.gitignore.io/api/visualstudiocode
 # Edit at https://www.gitignore.io/?templates=visualstudiocode
