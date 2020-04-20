@@ -9,10 +9,6 @@ export default class BassGuitar extends StringedInstrument{
         this._numberOfStrings = numberOfStrings;
     }
 
-    play() {
-        console.log(`${this._name}, a ${this._numberOfStrings}-stringed instrument that goes ${this.sound()}`);
-    }
-
     sound(): string {
         return 'Duum-duum-duum';
     }
