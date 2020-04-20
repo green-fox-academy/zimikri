@@ -1,3 +1,9 @@
+'use strict';
 
+import Instrument from './Instrument';
 
-StringedInstrument
+export default abstract class StringedInstrument extends Instrument {
+    protected _numberOfStrings: number;
+    abstract sound(): string;
+}
+

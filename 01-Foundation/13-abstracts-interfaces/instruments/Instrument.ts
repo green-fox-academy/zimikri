@@ -1,6 +1,6 @@
 'use strict';
 
 export default abstract class Instrument {
-    protected name: string;
-    abstract play();
+    protected _name: string;
+    abstract play(): void;
 }
