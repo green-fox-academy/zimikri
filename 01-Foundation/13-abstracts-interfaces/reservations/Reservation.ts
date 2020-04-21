@@ -19,7 +19,8 @@ export default class Reservation implements Reservationy {
     }
 
     getCodeBooking(numberOfDigits: number): string {
-        if (Reservation.RES_CODES.length == 36 ** numberOfDigits) throw { message: '\n\n*** There is no more unique booking code ***\n'};
+        if (Reservation.RES_CODES.length == 36 ** numberOfDigits) 
+            throw { message: '\n\n*** There is no more unique booking code. ***\n*** You have to increase the number of digits in booking code! ***\n'};
 
         let code: string;
         do {
