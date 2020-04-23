@@ -2,6 +2,10 @@
 
 import KochSnowflake from './KochSnowflake'
 
+const counter: number = 4;
+const kochAngle: number = 60;
+
 window.onload = (event) => {
-    new KochSnowflake(4);
+    new KochSnowflake(counter, kochAngle);
 };
+ 
