@@ -9,4 +9,4 @@
 - [TODO app](https://github.com/zimikri/todoapp-typescript)
 ### Pages
 - [My first website](https://zimikri.github.io/)
-- [Egg finder (Easter quarantine release)](https://zimikri.github.io/egg-finder)
+- [Egg finder (Easter quarantine release)](https://zimikri.github.io/egg-finder) :rabbit::egg:
