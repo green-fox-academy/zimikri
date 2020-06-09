@@ -1,11 +1,8 @@
 {
   "name": "01-first-static-file",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "node server first static file",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "static file"
   ],
