@@ -9,7 +9,7 @@ const counter = document.getElementsByClassName('display')[0];
 const timeout = setTimeout(explode, 10000, counter);
 const interval = setInterval(increment, 1000, counter);
 
-button.addEventListener('click', defuse, false, counter, button);
+button.addEventListener('click', defuse);
 
 function increment(counter) {
     counter.innerText--;
@@ -21,11 +21,11 @@ function explode(counter) {
     document.body.className = 'red-bg';
 }
 
-function defuse(counter, button) {
+function defuse(event) {
     clearTimeout(timeout);
     clearInterval(interval);
     counter.innerText = 'Bomb defused';
 
-    button.removeEventListener('click', defuse, false);
+    this.removeEventListener('click', defuse);
 }
 
