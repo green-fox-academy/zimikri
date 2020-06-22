@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bomb defuse with class</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .red-bg {
+      background-color: red;
+    }
+
+    .green-bg {
+      background-color: #95C624;
+    }
+
+    .display {
+      width: 500px;
+      line-height: 100px;
+      font-size: 48px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    button {
+      width: 500px;
+      line-height: 40px;
+      font-size: 28px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    button.inactive {
+        color: #777;
+    }
+    
+    button.inactive:hover {
+        cursor: default;
+    }
+  </style>
+</head>
+<body>
+  <div class="display">10</div>
+  <button>Defuse</button>
+</body>
+<script type="text/javascript" src="BombDefuse.js"></script>
+<script type="text/javascript" src="app-class.js"></script>
+</html>
