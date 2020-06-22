@@ -6,10 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bomb defuse</title>
   <style>
-    .red-bg {
-      background-color: red;
+    body {
       margin: 0;
       padding: 0;
+    }
+    .red-bg {
+      background-color: red;
+    }
+
+    .green-bg {
+      background-color: #95C624;
     }
 
     .display {
@@ -26,6 +32,18 @@
       font-size: 28px;
       margin: 0 auto;
       display: block;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    button.inactive {
+        color: #777;
+    }
+    
+    button.inactive:hover {
+        cursor: default;
     }
   </style>
 </head>
