@@ -12,22 +12,25 @@ const interval = setInterval(increment, 1000, counter);
 button.addEventListener('click', defuse);
 
 function increment(counter) {
-    counter.innerText--;
+    counter.textContent--;
 }
 
 function explode(counter, button) {
-    clearInterval(interval);
-    counter.innerText = 'Bomb exploded';
-    document.body.className = 'red-bg';
-
-    button.removeEventListener('click', defuse);
+    end('Bomb exploded','red-bg');
 }
 
-function defuse(event) {
+function defuse() {
+    end('Bomb defused','green-bg');
+}
+
+function end(text, bgClass) {
     clearTimeout(timeout);
     clearInterval(interval);
-    counter.innerText = 'Bomb defused';
+    
+    counter.textContent = text;
+    document.body.className = bgClass;
+    button.className = 'inactive';
 
-    this.removeEventListener('click', defuse);
+    button.removeEventListener('click', defuse);
 }
 
