@@ -23,7 +23,7 @@
 			// 2. store 'The Businessman' and 'The Lamplighter'
 			// in the 'businessLamp' variable.
             // console.log each of them.
-            const businessLamp = [...document.getElementsByClassName('big')];
+            const businessLamp = document.querySelectorAll('.big');
             businessLamp.forEach(element => {
                 console.log(element);
             });
@@ -39,7 +39,7 @@
 			// 4. store 'The King', 'The Conceited Man' and 'The Lamplighter'
 			// in the 'noBusiness' variable.
             // console.log each of them.
-            const noBusiness = [...document.getElementsByTagName('div')];
+            const noBusiness = document.querySelectorAll('div');
             noBusiness.forEach((element) => {
                 console.log(element);
             });
