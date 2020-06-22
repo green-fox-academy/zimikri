@@ -2,8 +2,7 @@
 
 // import BombDefuse from './BombDefuse';
 
-let bomb;
 window.onload = () => {
-    bomb = new BombDefuse(5000);
+    const bomb = new BombDefuse(10000);
 };
 
