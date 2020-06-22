@@ -1,6 +1,6 @@
 'use strict';
 
-class BombDefuse {
+export default class BombDefuse {
     button;
     counter;
     timeout;
