@@ -41,9 +41,7 @@ const selectableItems = document.getElementById('left-list').getElementsByTagNam
 function generateLayout(lists) {
     const section = document.createElement('section');
 
-    lists
-        .map(list => createUl(list))
-        .forEach(ul => section.appendChild(ul));
+    lists.forEach(list => section.appendChild(createUl(list)));
 
     selectItem(section.getElementsByTagName('li')[0]);
     document.body.prepend(section);
@@ -53,9 +51,8 @@ function createUl(list) {
     const newUl = document.createElement('ul');
     if (list.id) newUl.id = list.id;
 
-    let newLi;
     list.items.forEach(element => {
-        newLi = document.createElement('li');
+        const newLi = document.createElement('li');
         newLi.innerHTML = element;
 
         newUl.appendChild(newLi);
@@ -66,9 +63,12 @@ function createUl(list) {
 
 function getSelectedIndex() {
     return [...selectableItems]
-        .reduce((selectedIndex, currentValue, currentIndex) => {
-            return isSelected(currentValue) ? currentIndex : selectedIndex;
-        }, -1);
+        .reduce(
+            (selectedIndex, currentValue, currentIndex) => {
+                return isSelected(currentValue) ? currentIndex : selectedIndex;
+            },
+            -1
+        );
 }
 
 function moveUp() {
@@ -77,12 +77,12 @@ function moveUp() {
 
 function moveDown() {
     selectNext(1);
-    
 }
 
 function deleteItem() {
     const selectedIndex = getSelectedIndex();
-    if (selectableItems.length < 1 ||  selectedIndex < 0) return;
+    
+    if (selectedIndex < 0) return;
 
     selectableItems[selectedIndex].remove();
     if (selectableItems.length) selectItem(selectableItems[0]);
@@ -90,9 +90,9 @@ function deleteItem() {
 
 function pushItemRight() {
     const selectedIndex = getSelectedIndex();
-    if (selectableItems.length < 1 ||  selectedIndex < 0) return;
+    if (selectedIndex < 0) return;
 
-    unselectItem(selectableItems[selectedIndex]);
+    deselectItem(selectableItems[selectedIndex]);
     document.getElementById('right-list').appendChild(selectableItems[selectedIndex]);
     if (selectableItems.length) selectItem(selectableItems[0]);
 }
@@ -103,6 +103,7 @@ function selectNext(step) {
     let nextIndex;
 
     if (!itemsCount) return;
+
     if (selectedIndex + step == -1) {
         nextIndex = itemsCount - 1;
     } else if (selectedIndex + step == itemsCount) {
@@ -111,7 +112,7 @@ function selectNext(step) {
         nextIndex = selectedIndex + step;
     }
 
-    unselectItem(selectableItems[selectedIndex]);
+    deselectItem(selectableItems[selectedIndex]);
     selectItem(selectableItems[nextIndex]);
 }
 
@@ -119,7 +120,7 @@ function selectItem(item) {
     item.style.backgroundColor = '#ccc';
 }
 
-function unselectItem(item) {
+function deselectItem(item) {
     item.style.backgroundColor = null;
 }
 
