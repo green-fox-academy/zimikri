@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+    padding: 0 10px 0 0;
+}
+
+a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+}
+
+th {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 20px;
+}
+
+td {
+    padding: 7px 20px;
+}
+
+td:nth-child(2n) {
+    font-weight: 400;
+    text-align: center;
+}
+
+tbody tr:nth-child(2n+1) td {
+    background-color: #eee;
+}
+
+dl {
+    margin: 0;
+}
+
+dt {
+    font-weight: 400;
+}
+
+dt span {
+    font-weight: 300;
+}
+
+dd {
+    padding: 0 0 2px 0;
+    margin: 0;
+    font-size: 85%;
+    color: #333;
+}
