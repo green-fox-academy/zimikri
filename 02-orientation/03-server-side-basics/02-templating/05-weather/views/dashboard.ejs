@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather - dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" />
+</head>
+<body>
+    <section>
+        <div id="forecast">
+            <% currentForecasts.forEach(cityData => { %>
+                <a href="/cities/<%= cityData.city %>" title="Show detailed forecast for <%= cityData.city %>">
+                    <div class="city-wrapper">
+                        <div class="city-tile">
+                            <div class="city"><%= cityData.city %></div>
+                            <div class="location"><%= cityData.location %></div>
+                        </div>
+                        <div class="degree-tile">
+                            <%= cityData.currWeather.temp %> °C
+                        </div>
+                        <div class="pic-tile">
+                            <img src="/assets/<%= cityData.currWeather.icon %>.png" title="<%= cityData.currWeather.message %>">
+                        </div>
+                    </div>
+                </a>
+            <% }) %> 
+        </div>
+    </section>
+</body>
+</html>
