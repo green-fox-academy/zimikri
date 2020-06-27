@@ -32,11 +32,12 @@ app.post("/arrays", function (req, res) {
         numbers !== undefined &&
         typeof numbers == "object"
     ) {
-        if (actions[what] === undefined) {
+        const action = actions[what];
+        if (action === undefined) {
             response.error = "This action is not defined!";
             res.statusCode = 400;
         } else {
-            response.result = actions[what](numbers);
+            response.result = action(numbers);
         }
     } else {
         const error = [];
