@@ -25,19 +25,19 @@ app.post("/sith", function (req, res) {
 
 function confuseWords(sentences) {
     const confusedSentences = [];
+
     sentences.forEach((sentence) => {
         const words = sentence.split(" ");
+
         for (let i = 0; i < words.length - 2; i += 2) {
             [words[i], words[i + 1]] = [
                 words[i + 1].toLowerCase(),
                 words[i].toLowerCase(),
             ];
         }
-        let confusedSentence = words.join(" ");
-        confusedSentence =
-            confusedSentence.charAt(0).toUpperCase() +
-            confusedSentence.slice(1);
-        confusedSentences.push(confusedSentence);
+
+        words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+        confusedSentences.push(words.join(" "));
     });
 
     return confusedSentences;
@@ -54,15 +54,15 @@ function insertBlaBla(sentences) {
 }
 
 function getRandomBlaBla() {
-    const fakeSentences = ["Arrgh", "Err..err.err", "Uhmm"];
+    const blaBlaSentences = ["Arrgh", "Err..err.err", "Uhmm"];
     const sentenceCount = Math.floor(Math.random() * 2) + 1;
 
     for (let i = 0; i < sentenceCount; i++) {
-        const randomIndex = Math.floor(Math.random() * fakeSentences.length);
-        fakeSentences.splice(randomIndex, 1);
+        const randomIndex = Math.floor(Math.random() * blaBlaSentences.length);
+        blaBlaSentences.splice(randomIndex, 1);
     }
 
-    return fakeSentences;
+    return blaBlaSentences;
 }
 
 app.listen(3000, "localhost");
