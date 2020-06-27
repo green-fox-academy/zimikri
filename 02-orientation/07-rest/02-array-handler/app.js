@@ -27,11 +27,7 @@ app.post("/arrays", function (req, res) {
         },
     };
 
-    if (
-        what !== undefined &&
-        numbers !== undefined &&
-        typeof numbers == "object"
-    ) {
+    if (what !== undefined && numbers !== undefined && Array.isArray(numbers)) {
         const action = actions[what];
         if (action === undefined) {
             response.error = "This action is not defined!";
@@ -44,9 +40,10 @@ app.post("/arrays", function (req, res) {
         if (what === undefined)
             error.push("Please provide what to do with the numbers!");
         if (numbers === undefined) error.push("Please provide numbers!");
-        if (typeof numbers != "object") error.push("Numbers should be array!");
+        if (!Array.isArray(numbers)) error.push("Numbers should be array!");
 
         response.error = error.join("\n");
+        res.statusCode = 400;
     }
 
     res.send(response);
