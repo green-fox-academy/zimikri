@@ -1,0 +1,15 @@
+{
+  "name": "02-import",
+  "version": "1.0.0",
+  "description": "Use the [bookstore database](../../sql-basics/assets/data.sql) from the previously completed SQL basics workshop.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
