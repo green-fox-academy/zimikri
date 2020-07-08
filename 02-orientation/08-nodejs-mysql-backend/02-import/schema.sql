@@ -1,5 +1,8 @@
 USE bookinfo;
-CREATE TABLE `bookinfo`.`users` (
+
+DROP TABLE IF EXISTS;
+
+CREATE TABLE `users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `prefix` VARCHAR(30) NOT NULL DEFAULT '',
   `first_name` VARCHAR(50) NOT NULL DEFAULT '',
