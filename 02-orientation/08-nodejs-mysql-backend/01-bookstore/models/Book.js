@@ -10,33 +10,49 @@ let Book = function(book) {
     this.price = book.price;
 }
 
-Book.listAll = function(filters, callback) {
+Book.list = function(filters, callback) {
     const conds = [];
     const condValues = [];
+    let dataType;
 
     Object.keys(filters).forEach(filterKey => {
         switch (filterKey) {
+            case 'title':
+                conds.push(`m.book_name like ?`);
+                dataType = 'text';
+                break;
+        
+            case 'author':
+                conds.push(`a.aut_name like ?`);
+                dataType = 'text';
+                break;
+        
             case 'category':
                 conds.push(`c.cate_descrip like ?`);
+                dataType = 'text';
                 break;
         
             case 'publisher':
                 conds.push(`p.pub_name like ?`);
+                dataType = 'text';
                 break;
         
             case 'plt':
                 conds.push(`m.book_price < ?`);
+                dataType = 'num';
                 break;
     
             case 'pgt':
                 conds.push(`m.book_price > ?`);
+                dataType = 'num';
                 break;
             
             default:
                 break;
         }
         
-        condValues.push(decodeURIComponent(filters[filterKey]));
+        if (dataType == 'text') filters[filterKey] = '%' + decodeURIComponent(filters[filterKey]) + '%';
+        condValues.push(filters[filterKey]);
     });
 
     let query = `

@@ -5,3 +5,22 @@ body {
     max-width: 960px;
     margin: 0 auto;
 }
+
+.table-head-label {
+    width: 100%;
+}
+input {
+    border: 1px solid #ccc;
+    box-shadow: none;
+    padding: 4px;
+}
+
+input.half-input {
+    width: 49%;
+    float: left;
+    margin-left: 1%;
+}
+
+th input.half-input:first-child {
+    margin-left: 0;
+}
