@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Workshop: EventListeners</title>
+  </head>
+  <body>
+    <button>Click me</button>
+
+    <script>
+      const button = document.getElementsByTagName('button')[0];
+      let timeout = null;
+
+      //
+      //  with disabled attribute
+      //
+      // button.addEventListener('click', (e) => {
+      //   button.setAttribute('disabled', true);
+      //   console.log(Date.now());
+      //   setTimeout(() => button.removeAttribute('disabled'), 2000);
+      // });
+
+      //
+      //  with timeout
+      //
+      button.style.backgroundColor = 'green';
+      button.addEventListener('click', (e) => {
+        if (timeout == null) {
+          button.style.backgroundColor = 'red';
+          console.log(Date.now());
+          timeout = setTimeout(() => {
+            timeout = null;
+            button.style.backgroundColor = 'green';
+          }, 2000);
+        }
+      });
+    </script>
+    <!-- You can work in the html or in a separate js file. Like:
+
+    <script>
+      Create an event listener which logs the current timestamp to the console once the button is clicked.
+      When the button is clicked for the second or any other times no event listener should be called.
+      Try to solve this two different ways.
+      hint: take a look at the button attributes https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button
+    </script>
+
+    OR
+
+    <script src="one-time-clicker.js"></script> -->
+  </body>
+</html>
