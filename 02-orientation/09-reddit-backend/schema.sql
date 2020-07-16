@@ -29,11 +29,12 @@ CREATE TABLE IF NOT EXISTS `post` (
 -- Table structure for table `user`
 --
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `user2` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(45) NOT NULL DEFAULT '',
 
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX (`username`)
 );
 
 
