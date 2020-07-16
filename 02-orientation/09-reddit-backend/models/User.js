@@ -3,23 +3,22 @@
 const db = require('../db');
 
 let User = function (user) {
-    console.log(user);
     
-    if (user.id) User.id = user.id;
-    User.username = user.username;
+    // if (user.id) User.id = user.id;
+    // User.username = user.username;
 
-    if (!user.id || !user.username)
-        user = User.list(user.id, user.username, (err, user) => {
-            if (err) {
-                return;
-            }
-            if (user) {
-                User.id = user.id;
-                User.username = user.username;
-            }
-        });
+    // if (!user.id || !user.username)
+    //     user = User.list(user.id, user.username, (err, user) => {
+    //         if (err) {
+    //             return;
+    //         }
+    //         if (user) {
+    //             User.id = user.id;
+    //             User.username = user.username;
+    //         }
+    //     });
     
-    return User;
+    // return User;
 };
 
 User.list = function (id, username, callback) {
@@ -40,8 +39,8 @@ User.list = function (id, username, callback) {
         
     db.query(query, condValues, (err, users) => {
         if (err) {
-            console.error('Error during DB query:', err);
-            return callback(err, null);
+            callback(User.setClientDbError(err), null);
+            return;
         }
         if ((id || username) && users) return callback(null, users[0]);
 
@@ -49,32 +48,51 @@ User.list = function (id, username, callback) {
     });
 };
 
-User.add = function (user, callback) {
+User.add = function (username, callback) {
+    if (!username) {
+        callback({ resCode: 400, clientMessage: 'Empty username' }, null);
+        return
+    }
     
-    let query = `INSERT IGNORE INTO user SET ?`;
-    if (username) user.username;
-    user.timestamp = Math.floor(Date.now() / 1000);
-
-    db.query(query, user, (err, result) => {
+    const query = `INSERT IGNORE INTO user SET ?`;
+    db.query(query, [username], (err, result) => {
         if (err) {
-            console.error('Error during DB query:', err);
-            return callback(err, null);
+            callback(User.setClientDbError(err), null);
+            return;
         }
-        
+        // TODO: handle if user existed before
         callback(null, result.insertId);
     });
 }
 
 User.getUserByUsername = (username, callback) => {
+    if (!username)
+        return callback({
+            resCode: 401,
+            clientMessage: 'You should send username in header to use this resource!',
+        }, null);
+
     const query = `SELECT * FROM user WHERE username = ?`;
     db.query(query, [username], (err, user) => {
         if (err) {
-            console.error('Error during DB query:', err);
-            return callback(err, null);
+            callback(User.setClientDbError(err), null);
+            return;
+        }
+        if (!user[0]) {
+            callback(User.setClientDbError({}, 401, `There is no registered user with usename: ${username}`), null);
+            return;
         }
         
-        return (user) ? callback(null, user[0]) : callback(null, {});
+        return callback(null, user[0]);
     });
+};
+
+User.setClientDbError = (err, code = 0, message = '') => {
+    err.clientMessage = message || 'Error during DB query';
+    err.resCode = code || 500;
+    console.error(`${err.clientMessage}: `, err);
+
+    return err;
 };
 
 module.exports = User;

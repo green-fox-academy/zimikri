@@ -2,20 +2,18 @@
 
 const Post = require('../models/Post');
 const User = require('../models/User');
-const loggedInUser = {};
-
-// const user = new User();
+const Vote = require('../models/Vote');
 
 const postController = function(app) {
     app.get('/posts', (req, res) => {
         
-        if (req.query.id) return res.redirect(`/posts/${req.query.id}`);
+        if (req.query.id)
+            return res.redirect(`/posts/${req.query.id}`);
 
         Post.list(req.headers.username, (err, posts) => {
             if (err) 
-                return postController.sendError(res, 500, 'Error during DB query');
+                return res.status(err.resCode).json({ error: err.clientMessage });
             
-
             res.json({
                 posts: posts,
             });
@@ -23,127 +21,104 @@ const postController = function(app) {
     });
 
     app.get('/posts/:id', (req, res) => {
-        Post.getItem(req.params.id, req.headers.username, (err, post) => {
+        Post.item(req.params.id, req.headers.username, (err, post) => {
             if (err) 
-                return postController.sendError(res, 500, 'Error during DB query');
+                return res.status(err.resCode).json({ error: err.clientMessage });
             
-            res.json(post || {});
+            res.json(post);
         });
     });
 
     app.post('/posts', (req, res) => {
-        postController.authUser(res, req.headers.username, (err, user) => {
-            if (err) return;
+        User.getUserByUsername(req.headers.username, (err, user) => {
+            if (err)
+                return res.status(err.resCode).json({ error: err.clientMessage });
 
             Post.add(req.body, user.id, (err, newId) => {
                 if (err) 
-                    return postController.sendError(res, 500, 'Error during DB query');
+                    return res.status(err.resCode).json({ error: err.clientMessage });
             
                 res.redirect(`/posts/${newId}`);
-                return;
             });
         });
     });
 
     app.put('/posts/:id/:vote', (req, res) => {
-        let vote = (req.params.vote == 'upvote') ? 1 : 0;
-        vote = (req.params.vote == 'downvote') ? -1 : vote;
+        const vote = (req.params.vote == 'upvote') * 1 + (req.params.vote == 'downvote') * -1;
         if (vote == 0)
-            return postController.sendError(res, 404, 'No such resurce');
+            return res.status(404).json({ error: 'No such resurce' });
 
-        postController.authUser(res, req.headers.username, (err, user) => {
-            if (err) return;
+        User.getUserByUsername(req.headers.username, (err, user) => {
+            if (err)
+                return res.status(err.resCode).json({ error: err.clientMessage });
  
-            Post.getItem(req.params.id, req.headers.username, (err, post) => {
-                if (err) 
-                    return postController.sendError(res, 500, 'Error during DB query');
-                
-                if (!post)
-                    return postController.sendError(res, 404, `Can't find the post you want to ${req.params.vote}`);
-                
-                post.vote += vote;
-                if (post.vote < -1 || post.vote > 1)
-                    return postController.sendError(res, 400, `You can't ${req.params.vote} again`);
+            Post.item(req.params.id, user.username, (err, post) => {
+                if (err)
+                    return res.status(err.resCode).json({ error: err.clientMessage });
 
-                Post.vote(post.id, user.id, vote, (err, result) => {
-                    if (err) 
-                        return postController.sendError(res, 500, err.clientMessage);
+                if (post.owner == user.username)
+                    return callback({
+                        resCode: 403,
+                        clientMessage: `Can't vote your own post`,
+                    });
+
+                if (post.vote + vote < -1 || post.vote + vote > 1)
+                    return res.status(400).json({ error: `You can't ${req.params.vote} again` });
                     
-                    post.score += vote;
-                    res.json(post);
+                Vote.add(post.id, user.id, vote, (err, voteValue) => {
+                    if (err)
+                        return res.status(err.resCode).json({ error: err.clientMessage });
+                    
+                    Post.vote(post.id, voteValue, (err, result) => {
+                        if (err)
+                            return res.status(err.resCode).json({ error: err.clientMessage });
+                        
+                        return res.redirect(`/posts/${post.id}`);
+                    });
                 });
             });
         });
     });
 
     app.put('/posts/:id', (req, res) => {
-        postController.authUser(res, req.headers.username, (err, user) => {
-            if (err) return;
+        User.getUserByUsername(req.headers.username, (err, user) => {
+            if (err) return res.status(err.resCode).json({ error: err.clientMessage });
             
-            Post.getItem(req.params.id, req.headers.username, (err, post) => {
+            Post.item(req.params.id, req.headers.username, (err, post) => {
                 if (err) 
-                    return postController.sendError(res, 500, err.clientMessage);
-                if (!post)
-                    return postController.sendError(res, 404, `Can't be found the post you want to update`);
+                    return res.status(err.resCode).json({ error: err.clientMessage });
                 if (post.owner !== req.headers.username)
-                    return postController.sendError(res, 403, `You can only update your own posts`);
+                    return res.status(403).json({ error: `You can only update your own posts` });
 
                 Post.update(req.params.id, req.body.title, req.body.url, (err, timestamp) => {
                     if (err) 
-                        return postController.sendError(res, 500, err.clientMessage);
+                        return res.status(err.resCode).json({ error: err.clientMessage });
                     
-                    post.title = req.body.title;
-                    post.url = req.body.url;
-                    res.json(post);
+                    res.redirect(`/posts/${post.id}`);
                 });
             });
         });
      });
 
     app.delete('/posts/:id', (req, res) => {
-        postController.authUser(res, req.headers.username, (err, user) => {
-            if (err) return;
-            Post.getItem(req.params.id, req.headers.username, (err, post) => {
+        User.getUserByUsername(req.headers.username, (err, user) => {
+            if (err) return res.status(err.resCode).json({ error: err.clientMessage });
+
+            Post.item(req.params.id, user.username, (err, post) => {
                 if (err) 
-                    return postController.sendError(res, 500, err.clientMessage);
-                if (!post)
-                    return postController.sendError(res, 404, `Can't be found the post you want to delete`);
-                if (post.owner !== req.headers.username)
-                    return postController.sendError(res, 403, `You can only delete your own posts`);
+                    return res.status(err.resCode).json({ error: err.clientMessage });
+                if (post.owner !== user.username)
+                    return res.status(403).json({ error: `You can delete only your own posts` });
             
                 Post.delete(req.params.id, (err, result) => {
                     if (err) 
-                        return postController.sendError(res, 500, err.clientMessage);
+                        return res.status(err.resCode).json({ error: err.clientMessage });
                     
                     res.json(post);
                 });
             });
         });
     });
-};
-
-postController.authUser = (res, username, callback) => {
-    if (!username) {
-        postController.sendError(res, 401, 'You should send username in header to use this resource!');
-        return callback(true, null);
-    }
-
-    User.getUserByUsername(username, (err, user) => {
-        if (err) {
-            postController.sendError(res, 500, 'Error during DB query');
-            return callback(true, null);
-        }
-        if (!user) {
-            postController.sendError(res, 401, `There is no registered user with usename: ${username}`);
-            return callback(true, null);
-        }
-
-        callback(null, user);
-    });
-};
-
-postController.sendError = (res, code, message) => {
-    return res.status(code).json({ error: message });
 };
 
 module.exports.postController = postController;

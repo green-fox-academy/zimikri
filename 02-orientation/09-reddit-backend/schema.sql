@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS `user2` (
     UNIQUE INDEX (`username`)
 );
 
-
 --
 -- Table structure for table `vote`
 --
