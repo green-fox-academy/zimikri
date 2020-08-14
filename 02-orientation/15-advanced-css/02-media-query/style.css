@@ -1,0 +1,33 @@
+body {
+    padding: 5%;
+    margin: 0; 
+}
+
+#items-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#items-wrapper > div {
+    height: 150px;
+    flex-grow: 1;
+}
+
+.green {
+    background-color: #57d121;
+}
+
+#items-wrapper > div.yellow {
+    background-color: #fdd132;
+    flex-grow: 2;
+}
+
+.purple {
+    background-color: #bf1ff0;
+}
+
+@media (min-width: 600px) {
+    #items-wrapper {
+        flex-direction: row;
+    }    
+}
