@@ -60,7 +60,7 @@ const cocktails = [
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
-app.use('/static', express.static('static'));
+app.use(express.static('static'));
 
 // home page
 app.get('/', (req, res) => {
