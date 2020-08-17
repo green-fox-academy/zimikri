@@ -60,7 +60,7 @@ const forecasts = [
   ];
 
 app.set('view engine', 'ejs');
-app.use('/assets', express.static('static'))
+app.use(express.static('static'))
 
 app.get('/', (req, res) => {
     const currentForecasts = forecasts.map(forecast => {
@@ -76,7 +76,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/cities/:cityName', (req, res) => {
-    const cityForecast = forecasts.filter(forecast => {return forecast.city == req.params.cityName})[0];
+    const cityForecast = forecasts.filter(forecast => {
+        return forecast.city == req.params.cityName;
+    })[0];
+
     res.render('details', {
         cityForecast: cityForecast,
     });

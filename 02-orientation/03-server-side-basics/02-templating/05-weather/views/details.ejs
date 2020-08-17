@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather - details</title>
-    <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet" />
 </head>
 <body>
@@ -15,7 +15,7 @@
                 <% cityForecast.weather.forEach(cityData => { %>
                         <div class="detail-wrapper">
                             <div class="pic-detail">
-                                <img src="/assets/<%= cityData.icon %>.png">
+                                <img src="/<%= cityData.icon %>.png">
                             </div>
                             <div class="degree-detail">
                                 <%= cityData.temp %> °C
