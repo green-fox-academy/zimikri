@@ -1,0 +1,12 @@
+{
+  "name": "01-promise",
+  "version": "1.0.0",
+  "description": "In this exercise you should install an npm package named `promise-it-wont-hurt`. You will learn the ins and outs of promises including error handling, value propagation, synchronous returns, and composition with this tool.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
