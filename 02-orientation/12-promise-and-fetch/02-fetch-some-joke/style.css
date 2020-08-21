@@ -47,6 +47,8 @@ section {
 }
 
 #button {
+    padding: 0;
+    border: none;
     display: block;
     height: 2.5rem;
     font-size: 80%;
@@ -54,4 +56,8 @@ section {
     line-height: 2.5rem;
     cursor: pointer;
     font-weight: 400;
+}
+
+#button:focus {
+    outline: none;
 }

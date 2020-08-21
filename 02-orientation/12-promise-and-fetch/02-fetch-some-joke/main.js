@@ -5,6 +5,7 @@ const jokeUrl = 'http://api.icndb.com/jokes/random';
 const errorOnRequest = (err) => {
     document.body.className = '';
     document.getElementById('joke').innerHTML = 'Unfortunately no jokes for today :(';
+    console.error(err.message);
 };
 
 const displayJoke = () => {
@@ -19,15 +20,11 @@ const displayJoke = () => {
 
 const fetchJson = (url) => {
     return fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        console.log(response);
-                        throw Error(response.statusText);
-                    }
-                    return response;
-                })
-                .then(response => response.json())
-                .catch(errorOnRequest);
+        .then(response => {
+            if (response.ok)
+                return response.json();
+        })
+        .catch(errorOnRequest);
 }
 
 window.onload = () => {
