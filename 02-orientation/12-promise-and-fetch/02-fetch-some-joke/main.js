@@ -2,29 +2,30 @@
 
 const jokeUrl = 'http://api.icndb.com/jokes/random';
 
-const errorOnRequest = (err) => {
-    document.body.className = '';
-    document.getElementById('joke').innerHTML = 'Unfortunately no jokes for today :(';
-    console.error(err.message);
-};
-
 const displayJoke = () => {
-    fetchJson(jokeUrl)
-        .then(joke => {
-            if (joke && joke.type == 'success') {
-                document.body.className = 'has-joke';
-                document.getElementById('joke').innerHTML = joke.value.joke;
-            }
-        });
+    fetchJson(
+        jokeUrl,
+        renderJoke,
+        renderJokeError
+    );
 }
 
-const fetchJson = (url) => {
-    return fetch(url)
-        .then(response => {
-            if (response.ok)
-                return response.json();
-        })
-        .catch(errorOnRequest);
+const renderJoke = (joke) => {
+    document.body.className = 'has-joke';
+    document.getElementById('joke').innerHTML = joke.value.joke;
+}
+
+const renderJokeError = (err) => {
+    document.body.className = '';
+    document.getElementById('joke').innerHTML = 'Unfortunately no jokes for today :(';
+    if (err) console.error(err.message);
+};
+
+const fetchJson = (url, onSuccess, onError) => {
+    fetch(url)
+        .then(response => response.json())
+        .then(onSuccess)
+        .catch(onError);
 }
 
 window.onload = () => {
