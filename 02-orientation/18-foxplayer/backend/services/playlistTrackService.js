@@ -32,8 +32,8 @@ playlistTrackService.add = (playlistId, trackId) => {
     if (!numberValidator.isInt(playlistId) || !playlistId) errorMessages.push('Invalid playlist id');
     if (!numberValidator.isInt(trackId) || !trackId) errorMessages.push('Invalid track id');
     if (errorMessages.length) {
-        const errorResponse = responseMessage.error(errorMessages.join(', '))
-        return new Promise((resolve, reject) => reject(errorResponse))
+        const errorResponse = responseMessage.error(errorMessages.join(', '));
+        return new Promise((resolve, reject) => reject(errorResponse));
     }
 
     return playlistService.getPlaylist(playlistId)
