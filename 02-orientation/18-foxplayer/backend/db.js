@@ -1,6 +1,8 @@
 'use strict';
 
 const db = require('mysql');
+require('dotenv').config();
+const responseMessage = require('./models/dtos/ResponseMessage');
 
 const conn = db.createConnection({
     host: process.env.FOX_DB_HOST,
@@ -20,12 +22,12 @@ conn.connect((err) => {
     console.log('Connected to DB');
 });
 
-const dbQuery = (query, params) => {
+const dbQuery = (query, params = null) => {
     return new Promise((resolve, reject) => {
         conn.query(query, params, (err, response) => {
             if (err) {
                 console.error(err);
-                reject(err);
+                reject(responseMessage.error('DB error'));
             } else {
                 resolve(response);
             }
