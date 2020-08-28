@@ -1,4 +1,4 @@
 node_modules
 teszt*
-.zip
+*.zip
 .env
