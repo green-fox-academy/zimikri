@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const router = require('./router');
+const responseMessage = require('../models/dtos/ResponseMessage');
 
 require('dotenv').config();
 
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send({'API status': 'ok'});
+    res.send(responseMessage.ok('Foxplayer API works'));
 });
 
 router.route(app);
