@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const playlistService = require('../services/playlistService');
+const responseMessage = require('../models/dtos/ResponseMessage');
 
 router.get('/', (req, res) => {
     playlistService.getPlaylists()
@@ -23,7 +24,7 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/', (req, res) => {
-    res.json({ error: 'You should give the id of playlist' });
+    res.json(responseMessage.error('You should give the id of playlist'));
 })
 
 router.delete('/:id', (req, res) => {
