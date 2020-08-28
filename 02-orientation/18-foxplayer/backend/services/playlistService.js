@@ -2,6 +2,7 @@
 
 const Playlist = require('../models/Playlist');
 const responseMessage = require('../models/dtos/ResponseMessage');
+const numberValidator = require('../models/dtos/NumberValidator');
 
 const playlistService = () => {
 
@@ -36,9 +37,8 @@ playlistService.createPlaylist = (title) => {
 }
 
 playlistService.deletePlaylist = (id) => {
-    if (!validNumber(id)) {
+    if (!numberValidator.isInt(id)) 
         return new Promise((resolve, reject) => reject(responseMessage.error(`Invalid id: ${id}`)));
-    }
 
     return playlistService.getPlaylist(id)
         .then(playlist => {
@@ -68,10 +68,6 @@ playlistService.deletePlaylist = (id) => {
 
 const validateText = (text) => {
     return text.replace(/[^a-zA-Z0-9\- _]+/, '').trim();
-}
-
-const validNumber = (num) => {
-    return num == parseInt(num).toString()
 }
 
 module.exports = playlistService;
