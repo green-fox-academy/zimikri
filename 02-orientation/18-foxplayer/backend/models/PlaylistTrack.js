@@ -30,12 +30,8 @@ PlaylistTrack.getTrackList = (playlistId, order = 'id') => {
 }
 
 PlaylistTrack.delete = (playlistId, trackId) => {
-    const cond = [];
-    cond.push(`playlist_id = ${playlistId}`);
-    cond.push(`track_id = ${trackId}`);
-
-    const query = `DELETE FROM playlist_tracks WHERE ${cond.join(' AND ')}`;
-    return dbQuery(query);
+    const query = `DELETE FROM playlist_tracks WHERE playlist_id = ? AND track_id = ?}`;
+    return dbQuery(query, [playlistId, trackId]);
 }
 
 module.exports = PlaylistTrack;
