@@ -14,7 +14,7 @@ app.get('/yondu', (req, res) => {
     } else {
         response.distance = parseFloat(distance);
         response.time = parseFloat(time);
-        response.speed = response.distance / response.time;
+        response.speed = (response.time == 0) ? 'infinity' : response.distance / response.time;
     }
 
     res.json(response);
