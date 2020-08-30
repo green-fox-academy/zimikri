@@ -8,6 +8,9 @@ app.get('/groot', (req, res) => {
     const message = req.query.message;
     
     if (!message) {
+        response.received = message;
+        response.translated = 'I am Groot!';
+    } else {
         response.error = 'I am Groot!';
     }
 
