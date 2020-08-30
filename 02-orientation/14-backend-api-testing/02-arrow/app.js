@@ -11,6 +11,10 @@ app.get('/yondu', (req, res) => {
     if (distance === undefined || time === undefined) {
         res.status(400);
         response.error = 'You should send distance and time in query';
+    } else {
+        response.distance = parseFloat(distance);
+        response.time = parseFloat(time);
+        response.speed = response.distance / response.time;
     }
 
     res.json(response);
