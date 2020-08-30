@@ -9,7 +9,6 @@ const responseMessage = require('../models/dtos/ResponseMessage');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
-const HOST = process.env.FOX_HOST || 'localhost';
 const app = express();
 
 app.use(express.static('./public'));
@@ -17,11 +16,11 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send(responseMessage.ok('Foxplayer API works'));
+    res.json(responseMessage.ok('Foxplayer API works'));
 });
 
 router.route(app);
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
     console.log(`App listening on ${HOST}:${PORT}`);
 });
