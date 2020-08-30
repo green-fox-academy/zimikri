@@ -1,0 +1,24 @@
+{
+  "name": "04-calorietable",
+  "version": "1.0.0",
+  "description": "- Create Drax's calorie table! - It holds Food elements   - name, amount, calorie - Create a `GET /drax` endpoint - That responds with the list of his calorie table - Create the required amount of endpoints to be able to:   - add items to this table   - remove items from this table   - change the `amount` field of the food - Write at least 3 tests to this exercise!",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "supertest": "^4.0.2"
+  }
+}
