@@ -1,6 +1,7 @@
 'use strict';
 
 const db = require('mysql');
+const { query } = require('express');
 require('dotenv').config();
 
 const conn = db.createConnection({
@@ -19,3 +20,18 @@ conn.connect((err) => {
 
     console.log('Connected to DB');
 });
+
+const dbQuery = (query, args) => {
+    return new Promise((resolve, reject) => {
+        conn.query(query, args, (err, result) => {
+            if (err) {
+                console.error(err);
+                reject(err);
+            }
+
+            resolve(result);
+        });
+    });
+}
+
+module.exports = dbQuery;
