@@ -30,6 +30,32 @@ describe('GET /yondu with valid query params', () => {
     });
 });
 
+describe('GET /yondu with time=0', () => {
+    it('should return json with distance, time and infinity speed', done => {
+        const distance = 100.0;
+        const time = 0;
+
+        request(app)
+            .get(`/yondu?distance=${distance}&time=${time}`)
+            .expect(200)
+            .end((err, res) => {
+                expect(err).to.be.null;
+
+                expect(res.body)
+                    .to.have.property('distance')
+                    .to.equal(distance);
+                expect(res.body)
+                    .to.have.property('time')
+                    .to.equal(time);
+                expect(res.body)
+                    .to.have.property('speed')
+                    .to.equal('infinity');
+
+                done();
+            });
+    });
+});
+
 describe('GET /yondu with missing time query', () => {
     it('should return 400 - Bad request', done => {
         const distance = 100.0;
