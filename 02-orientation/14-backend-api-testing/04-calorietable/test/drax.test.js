@@ -26,3 +26,18 @@ describe('POST to /drax endpoint to create new food', () => {
             });
     });
 });
+
+describe('GET /drax endpoint', () => {
+    it('should return a list of food', done => {
+        request(app)
+            .get('/drax')
+            .expect(200)
+            .expect('Content-Type', /json/)
+            .end((err, res) => {
+                expect(err).to.be.null;
+                expect(res.body.length).is.gte(1);
+
+                done();
+            });
+    });
+});
