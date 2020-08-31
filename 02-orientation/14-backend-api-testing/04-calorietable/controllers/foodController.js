@@ -31,6 +31,14 @@ router.delete('/:id', (req, res) => {
         .catch((err) => {
             res.json({ error: err });
         });
-})
+});
+
+router.put('/:id', (req, res) => {
+    foodService.update(req.params.id, req.body.name, req.body.amount, req.body.calorie)
+    .then(response => res.json(response))
+    .catch((err) => {
+        res.json({ error: err });
+    });
+});
 
 module.exports = router;

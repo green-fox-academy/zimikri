@@ -7,6 +7,11 @@ const Food = () => {
 
 }
 
+Food.item = (id) => {
+    const query = 'SELECT name, amount, calorie FROM foods WHERE id = ?';
+    return dbQuery(query, id);
+}
+
 Food.list = () => {
     const query = 'SELECT name, amount, calorie FROM foods';
     return dbQuery(query, []);
@@ -39,6 +44,23 @@ Food.delete = (id) => {
                 reject(() => {
                     console.error('Error deleting data with id:', id);
                     return 'DB error';
+                });
+            });
+        });
+}
+
+Food.update = (id, updateData) => {
+    const query = 'UPDATE foods SET ? WHERE id = ?';
+
+    return dbQuery(query, [updateData, id])
+        .then(response => {
+            return new Promise((resolve, reject) => {
+                if (response.affectedRows)
+                    resolve(response);
+                
+                reject(() => {
+                    console.error('Error updating data with id:', id);
+                    return `No food with id: ${id}`;
                 });
             });
         });
