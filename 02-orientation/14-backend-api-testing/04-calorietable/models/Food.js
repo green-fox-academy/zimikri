@@ -28,4 +28,20 @@ Food.add = (name, amount, calorie) => {
         });
 }
 
+Food.delete = (id) => {
+    const query = 'DELETE FROM foods WHERE id = ?';
+    return dbQuery(query, [id])
+        .then(response => {
+            return new Promise((resolve, reject) => {
+                if (response.affectedRows)
+                    resolve(response);
+                
+                reject(() => {
+                    console.error('Error deleting data with id:', id);
+                    return 'DB error';
+                });
+            });
+        });
+}
+
 module.exports = Food;

@@ -21,8 +21,16 @@ router.post('/', (req, res) => {
     foodService.addNew(name, amount, calorie)
         .then(response => res.json(response))
         .catch(err => {
-            res.json({ error: 'Something went wrong on adding' });
+            res.json({ error: err });
         });
 });
+
+router.delete('/:id', (req, res) => {
+    foodService.delete(req.params.id)
+        .then(response => res.json(response))
+        .catch((err) => {
+            res.json({ error: err });
+        });
+})
 
 module.exports = router;
