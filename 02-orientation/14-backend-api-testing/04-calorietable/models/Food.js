@@ -11,4 +11,9 @@ Food.list = () => {
     return dbQuery(query, []);
 }
 
+Food.add = (name, amount, calorie) => {
+    const query = 'INSERT INTO foods SET ?';
+    return dbQuery(query, [name, amount, calorie]);
+}
+
 module.exports = Food;
