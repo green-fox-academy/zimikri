@@ -8,7 +8,7 @@ test('groot endpoint without message query param', (t) => {
     request(app)
         .get('/groot')
         .expect('Content-Type', /json/)
-        .expect(200)
+        .expect(400)
         .end((err, res) => {
             if (err) throw err;
 
