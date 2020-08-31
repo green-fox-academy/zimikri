@@ -7,7 +7,7 @@ const Food = () => {
 }
 
 Food.list = () => {
-    const query = 'SELECT name, amount, calorie FROM calorietable';
+    const query = 'SELECT name, amount, calorie FROM foods';
     return dbQuery(query, []);
 }
 
