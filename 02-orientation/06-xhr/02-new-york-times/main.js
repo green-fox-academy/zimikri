@@ -9,6 +9,7 @@ const getArticles = () => {
         .then(data => data.docs)
         .then(docs => docs.map(art => {
             return {
+                web_url: art.web_url,
                 headline: art.headline,
                 snippet: art.snippet.main,
                 pub_date: art.pub_date,
