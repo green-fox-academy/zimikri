@@ -14,4 +14,22 @@ const getGiphy = () => {
     httpRequest.send(null);
 }
 
+const renderThumbs = (thumbs) => {
+    const thumbsWrapper = document.getElementById('thumbsWrapper'); 
+    thumbsWrapper.innerHTML = '';
+
+    thumbs.forEach((thumb) => {
+        const thumbUrl = thumb.images.fixed_width_small_still.url;
+        const imgUrl = thumb.images.original.url;
+        const img = document.createElement('img');
+        img.src = thumbUrl;
+        img.onclick = () => {
+            document.getElementById('bigPicture').src = imgUrl;
+        }
+        thumbsWrapper.appendChild(img);
+    });
+
+    document.getElementById('bigPicture').src = thumbs[0].images.original.url;
+}
+
 window.onload = getGiphy;
