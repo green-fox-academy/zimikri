@@ -1,0 +1,28 @@
+#bigPicture {
+    display: block;
+    margin: 20px auto;
+    max-width: 400px;
+    max-height: 400px;
+    height: auto;
+}
+
+#thumbsOuter {
+    width: 400px;
+    margin: 0 auto 20px;
+    overflow-x: scroll;
+}
+
+#thumbsWrapper {
+    width: 1750px;
+    height: 100px;
+}
+
+#thumbsWrapper img {
+    max-height: 100px;
+    max-width: 100px;
+    display: inline-block;
+}
+
+#thumbsWrapper img:not(:last-child) {
+    margin-right: 10px;
+}
