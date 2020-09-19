@@ -22,3 +22,9 @@
 
 - [Reddit backend](https://github.com/zimikri/reddit-backend)  
 Heroku API: [https://zimikri-reddit-backend.herokuapp.com](https://zimikri-reddit-backend.herokuapp.com/)
+
+## [Project](https://github.com/green-fox-academy/zimikri/tree/master/01-Project)
+
+### Other repos
+
+- [Todo app](https://github.com/zimikri/todo-app)
